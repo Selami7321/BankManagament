@@ -65,7 +65,7 @@ public class User {
      * @param type transaction type
      * @param amount given amount
      */
-    public void transaction(TransactionType type, double amount) {
+    public int transaction(TransactionType type, double amount) {
         // get result according to transaction type
 
         // if result is -1 call printError() method
@@ -77,17 +77,22 @@ public class User {
             Double result = this.account.deposit(amount);
             if (result == -1) {
                 System.out.println("Yanlış işlem yaptınız.");
+                return -1;
             } else {
                 System.out.println("Yeni bakiyeniz: " + this.account.getBalance() + "$");
+                return 0;
             }
         } else {
             Double result = this.account.withdrawal(amount);
             if (result == -1) {
                 System.out.println("Bankanızda bu kadar para yok.");
+                return -2;
             } else if (result == -2) {
                 System.out.println("Yanlış işlem yaptınız.");
+                return -1;
             } else {
                 System.out.println("Yeni bakiyeniz: " + this.account.getBalance() + "$");
+                return 0;
             }
         }
 
